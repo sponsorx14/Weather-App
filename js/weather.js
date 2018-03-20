@@ -5,25 +5,27 @@ const CONSTANTS = Object.freeze({
   'CORS_URL': 'https://cors-anywhere.herokuapp.com/',
   'IMAGE_URL': '/static/img/weather/'
 });
-const iput = document.querySelector('#city');
+const cityInput = document.querySelector('#city');
 
 const getWoeid = city => (new Promise((resolve, reject) => {
     fetch(`${CONSTANTS.CORS_URL}${CONSTANTS.API_URL}${CONSTANTS.WOEID_URL}${city}`)
         .then(data => data.json())
-        .then(data => resolve(data[0].woeid));
+        .then(data => resolve(data[0].woeid))
+        .catch(error => alert('There is no such city!'))
 }));
 
 const getWeather = woeid => (new Promise((resolve, reject) => {
     fetch(`${CONSTANTS.CORS_URL}${CONSTANTS.API_URL}${CONSTANTS.WEATHER_URL}${woeid}`)
         .then(data => data.json())
-        .then(data => resolve(data.consolidated_weather));
+        .then(data => resolve(data))
 }));
 
 
 const generateTableData = data => {
+    let searchedCity = data.title;
     let result = '';
-    city.value = '';
-    data.forEach(item => {
+    cityInput.value = '';
+    data.consolidated_weather.forEach(item => {
         result += `
             <tr>
                 <td>${item.applicable_date}</td>
@@ -35,6 +37,7 @@ const generateTableData = data => {
     });
 
     document.getElementById('data').querySelector('tbody').innerHTML = result;
+    document.querySelector('.searches').innerHTML = searchedCity;
 };
 
 const checkEnter = (e) => {
