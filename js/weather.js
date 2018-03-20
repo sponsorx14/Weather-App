@@ -5,6 +5,7 @@ const CONSTANTS = Object.freeze({
   'CORS_URL': 'https://cors-anywhere.herokuapp.com/',
   'IMAGE_URL': '/static/img/weather/'
 });
+const iput = document.querySelector('#city');
 
 const getWoeid = city => (new Promise((resolve, reject) => {
     fetch(`${CONSTANTS.CORS_URL}${CONSTANTS.API_URL}${CONSTANTS.WOEID_URL}${city}`)
@@ -21,7 +22,7 @@ const getWeather = woeid => (new Promise((resolve, reject) => {
 
 const generateTableData = data => {
     let result = '';
-
+    city.value = '';
     data.forEach(item => {
         result += `
             <tr>
