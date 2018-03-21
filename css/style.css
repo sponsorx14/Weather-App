@@ -7,11 +7,19 @@ body {
     background: url('https://images.unsplash.com/photo-1520384324152-667315403adc?ixlib=rb-0.3.5&s=bea17a40ed874996b08aeb4d0209554f&auto=format&fit=crop&w=1920&q=100') no-repeat 0/cover;
     height: 100vh;
     width: 100vw;
-    font-weight: bold;
 
+}
+.row {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
 }
 .form-label {
   font-size: 20px;
+  font-weight: bold;
 }
 .btn-warning {
   outline: none;
@@ -24,11 +32,20 @@ body {
   font-weight: bold;
 }
 .searches {
-  font-size: 20px
+  font-size: 20px;
+  font-weight: bold;
+}
+.data-container {
+  border: 2px solid #fff;
+  background-color: rgba(0, 0, 0, 0.3);
+  min-height: 363px;
+  margin-left: 60px;
 }
 table thead th {
   font-size: 20px;
+  color: #fff;
 }
 table tbody td {
   font-size: 18px;
+  color: #fff;
 }
