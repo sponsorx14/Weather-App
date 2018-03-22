@@ -7,22 +7,15 @@ body {
     padding-top: 50px;
     background: url('https://images.unsplash.com/photo-1520384324152-667315403adc?ixlib=rb-0.3.5&s=bea17a40ed874996b08aeb4d0209554f&auto=format&fit=crop&w=1920&q=100') no-repeat 0/cover;
     height: 100vh;
-    width: 100vw;
 
 }
 body.swal2-shown:not(.swal2-no-backdrop):not(.swal2-toast-shown), html.swal2-shown:not(.swal2-no-backdrop):not(.swal2-toast-shown) {
   height: 100vh;
 }
-.row {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
-}
+
 .form-label {
   font-size: 20px;
+  padding: 10px 0;
   font-weight: bold;
 }
 .form-control {
@@ -35,9 +28,14 @@ body.swal2-shown:not(.swal2-no-backdrop):not(.swal2-toast-shown), html.swal2-sho
 .btn-warning,
 .btn:focus,
 .btn:active {
+  margin-top: 5px;
   outline: none;
   border: none;
   color: #000;
+}
+.form {
+  margin-right: 60px;
+  margin-bottom: 60px;
 }
 .searches-container {
   margin-top: 60px;
@@ -60,7 +58,7 @@ body.swal2-shown:not(.swal2-no-backdrop):not(.swal2-toast-shown), html.swal2-sho
   border: 2px solid #fff;
   background-color: rgba(0, 0, 0, 0.3);
   min-height: 363px;
-  margin-left: 60px;
+
 }
 table thead th {
   font-size: 20px;
