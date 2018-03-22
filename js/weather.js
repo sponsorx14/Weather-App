@@ -1,3 +1,4 @@
+
 const CONSTANTS = Object.freeze({
   'WOEID_URL': '/api/location/search/?query=',
   'API_URL': 'https://www.metaweather.com',
@@ -6,12 +7,17 @@ const CONSTANTS = Object.freeze({
   'IMAGE_URL': '/static/img/weather/'
 });
 const cityInput = document.querySelector('#city');
+const searchBtn = document.getElementById('search');
+
 
 const getWoeid = city => (new Promise((resolve, reject) => {
     fetch(`${CONSTANTS.CORS_URL}${CONSTANTS.API_URL}${CONSTANTS.WOEID_URL}${city}`)
         .then(data => data.json())
         .then(data => resolve(data[0].woeid))
-        .catch(error => alert('There is no such city!'))
+        .catch(error => sweetAlert('Oops...', 'No such city', 'error'))
+        .then(data => {if(data.value){
+          cityInput.value= '';
+        }})
 }));
 
 const getWeather = woeid => (new Promise((resolve, reject) => {
@@ -20,9 +26,16 @@ const getWeather = woeid => (new Promise((resolve, reject) => {
         .then(data => resolve(data))
 }));
 
+const generateHistory = city => {
+  let history = document.createElement('p');
+  history.innerHTML += city;
+  document.querySelector('.history').append(history);
+}
 
 const generateTableData = data => {
+  console.log(data);
     let searchedCity = data.title;
+    generateHistory(searchedCity);
     let result = '';
     cityInput.value = '';
     data.consolidated_weather.forEach(item => {
@@ -40,20 +53,12 @@ const generateTableData = data => {
     document.querySelector('.searches').innerHTML = searchedCity;
 };
 
-const checkEnter = (e) => {
-  if(e.keyCode ==13) {
-    e.preventDefault;
-    const city = document.getElementById('city').value;
-    getWoeid(city).then(woeid => getWeather(woeid).then(data => generateTableData(data)));
-  }
-}
-
 // main
-const searchBtn = document.getElementById('search');
+
 
 searchBtn.addEventListener('click', e => {
     e.preventDefault();
-
     const city = document.getElementById('city').value;
     getWoeid(city).then(woeid => getWeather(woeid).then(data => generateTableData(data)));
+
 });
